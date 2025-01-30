@@ -1,24 +1,39 @@
-import { ForwardedRef, forwardRef, InputHTMLAttributes } from "react";
+import {
+  ForwardedRef,
+  forwardRef,
+  InputHTMLAttributes,
+  ReactNode,
+} from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   errors?: string[];
+  icon?: ReactNode;
 }
 
 const _Input = (
-  { name, errors, ...rest }: InputProps,
+  { name, errors, icon, ...rest }: InputProps,
   ref: ForwardedRef<HTMLInputElement>
 ) => {
+  const hasError = errors && errors.length > 0;
+
   return (
     <div>
-      <input
-        name={name}
-        ref={ref}
-        {...rest}
-        className="bg-transparent rounded-full w-full h-10 placeholder:text-neutral-800 p-2 border border-gray-400"
-      />
+      <div className="flex relative items-center">
+        {icon && (
+          <span className="absolute left-4 text-neutral-500">{icon}</span>
+        )}
+        <input
+          name={name}
+          ref={ref}
+          {...rest}
+          className={`"bg-transparent ring-neutral-300 focus:outline-none focus:ring-2 transition placeholder:text-neutral-400 placeholder:text-sm placeholder:font-semibold rounded-full w-full h-10 py-2 pl-10 border border-neutral-300" ${
+            hasError ? "border-red-300" : "border-neutral-300"
+          }`}
+        />
+      </div>
       {errors?.map((error, idx) => (
-        <span key={idx} className="text-red-500 font-medium">
+        <span key={idx} className="text-red-400 text-xs font-medium">
           {error}
         </span>
       ))}

@@ -11,7 +11,7 @@ export default function Button({ text }: ButtonProps) {
   return (
     <button
       disabled={pending}
-      className="h-10 primary-btn disabled:bg-neutral-700 disabled:text-neutral-100 disabled:cursor-not-allowed"
+      className="h-10 bg-neutral-200 text-xs font-extrabold rounded-full primary-btn disabled:bg-neutral-400 disabled:text-neutral-500 disabled:cursor-not-allowed active:scale-95 transition-transform"
     >
       {pending ? "Loading..." : text}
     </button>
