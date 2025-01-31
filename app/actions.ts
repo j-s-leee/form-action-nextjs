@@ -7,9 +7,10 @@ const checkPassword = async (password: string) => {
 };
 
 const formSchema = z.object({
-  email: z.string().email(),
-  username: z.string(),
-  password: z.string().refine(checkPassword, "Wrong password"),
+  email: z.string().email().endsWith("@zod.com", "Only @zod.com emails are allowed"),
+  username: z.string().min(5, "Username should be at least 5 characters long."),
+  password: z.string().min(10, "Password should be at least 10 characters long.").regex(/[0-9]/, 
+    "Password should contains at least one number (0123456789).")
 });
 
 export async function loginAction(prevState: any, formData: FormData) {

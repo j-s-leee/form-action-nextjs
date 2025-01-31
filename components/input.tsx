@@ -32,11 +32,13 @@ const _Input = (
           }`}
         />
       </div>
+      <div className="flex flex-col gap-2">
       {errors?.map((error, idx) => (
         <span key={idx} className="text-red-400 text-xs font-medium">
           {error}
         </span>
       ))}
+      </div>
     </div>
   );
 };
