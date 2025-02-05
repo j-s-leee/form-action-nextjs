@@ -21,7 +21,7 @@ const _Input = (
     <div>
       <div className="flex relative items-center">
         {icon && (
-          <span className="absolute left-4 text-neutral-500">{icon}</span>
+          <span className="absolute left-4 size-5 text-gray-500">{icon}</span>
         )}
         <input
           name={name}
@@ -33,11 +33,11 @@ const _Input = (
         />
       </div>
       <div className="flex flex-col gap-2">
-      {errors?.map((error, idx) => (
-        <span key={idx} className="text-red-400 text-xs font-medium">
-          {error}
-        </span>
-      ))}
+        {errors?.map((error, idx) => (
+          <span key={idx} className="text-red-400 text-xs font-medium">
+            {error}
+          </span>
+        ))}
       </div>
     </div>
   );
