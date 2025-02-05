@@ -18,23 +18,15 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-10 py-8 px-32">
       <div className="flex flex-col gap-2 *:font-medium items-center">
-        <FireIcon />
+        <FireIcon className="size-16 text-red-400" />
         <form action={dispatch} className="flex flex-col gap-3 w-full">
           <Input
             name="email"
             required
             type="email"
             placeholder="Email"
-            icon={<AtSymbolIcon />}
-            errors={state?.errors?.fieldErrors.email}
-          />
-          <Input
-            name="username"
-            required
-            type="text"
-            placeholder="Username"
-            icon={<UserIcon />}
-            errors={state?.errors?.fieldErrors.username}
+            icon={<AtSymbolIcon className="text-gray-500" />}
+            errors={state?.fieldErrors.email}
           />
           <Input
             name="password"
@@ -42,18 +34,9 @@ export default function Home() {
             type="password"
             placeholder="Password"
             icon={<KeyIcon />}
-            errors={state?.errors?.fieldErrors.password}
+            errors={state?.fieldErrors.password}
           />
           <Button text="Log in" />
-
-          <span
-            className={`flex transition-all duration-700 items-center bg-emerald-500 font-semibold text-sm p-4 rounded-xl ${
-              state?.success ? "opacity-100 scale-100" : "opacity-0 scale-90"
-            }`}
-          >
-            <CheckBadgeIcon />
-            {state?.message}
-          </span>
         </form>
       </div>
     </div>

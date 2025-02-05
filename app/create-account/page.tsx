@@ -19,7 +19,7 @@ export default function CreateAccount() {
   return (
     <div className="flex flex-col gap-10 py-8 px-32">
       <div className="flex flex-col gap-2 *:font-medium items-center">
-        <FireIcon />
+        <FireIcon className="size-16 text-red-400" />
         <form action={dispatch} className="flex flex-col gap-3 w-full">
           <Input
             name="email"
