@@ -7,11 +7,11 @@ import { useActionState } from "react";
 import { createAccount } from "./actions";
 import {
   AtSymbolIcon,
-  CheckBadgeIcon,
   FireIcon,
   KeyIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export default function CreateAccount() {
   const [state, dispatch] = useActionState(createAccount, null);
@@ -53,16 +53,9 @@ export default function CreateAccount() {
             icon={<KeyIcon />}
             errors={state?.errors?.fieldErrors.confirmPassword}
           />
-          <Button text="Log in" />
-
-          <span
-            className={`flex transition-all duration-700 items-center bg-emerald-500 font-semibold text-sm p-4 rounded-xl ${
-              state?.success ? "opacity-100 scale-100" : "opacity-0 scale-90"
-            }`}
-          >
-            <CheckBadgeIcon />
-          </span>
+          <Button text="JOIN" />
         </form>
+        <Link href="/log-in">Log In</Link>
       </div>
     </div>
   );

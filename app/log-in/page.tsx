@@ -5,13 +5,8 @@ import Button from "@/components/button";
 import { loginAction } from "./actions";
 import Input from "@/components/input";
 import { useActionState } from "react";
-import {
-  AtSymbolIcon,
-  CheckBadgeIcon,
-  FireIcon,
-  KeyIcon,
-  UserIcon,
-} from "@heroicons/react/24/outline";
+import { AtSymbolIcon, FireIcon, KeyIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export default function Home() {
   const [state, dispatch] = useActionState(loginAction, null);
@@ -38,6 +33,7 @@ export default function Home() {
           />
           <Button text="Log in" />
         </form>
+        <Link href="/create-account">Create Account</Link>
       </div>
     </div>
   );
