@@ -3,6 +3,7 @@ import Button from "@/components/button";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { FireIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 async function getUser() {
@@ -31,6 +32,7 @@ export default async function Profile() {
     <div className="flex flex-col gap-10 py-8 px-32">
       <div className="flex flex-col gap-2 *:font-medium items-center">
         <FireIcon className="size-16 text-red-400" />
+        <Link href="/">HOME</Link>
         <div className="p-5 gap-5 flex flex-col justify-center">
           <div className="flex gap-3 justify-center">{user?.username}</div>
           <div className="flex gap-3 justify-center">{user?.email}</div>
