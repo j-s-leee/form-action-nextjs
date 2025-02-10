@@ -1,3 +1,4 @@
+import AddTweet from "@/components/add-tweet";
 import Tweets from "@/components/tweets";
 import { PAGE_SIZE } from "@/lib/constants";
 import db from "@/lib/db";
@@ -40,6 +41,7 @@ export default async function Homepage() {
       <div className="flex flex-col gap-2 *:font-medium items-center">
         <FireIcon className="size-16 text-red-400" />
         <Link href="/profile">PROFILE</Link>
+        <AddTweet />
         <Tweets initialTweets={tweets} />
       </div>
     </div>
