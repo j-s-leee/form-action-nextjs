@@ -4,6 +4,7 @@ import { PAGE_SIZE } from "@/lib/constants";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { tweetSchema } from "./schema";
+import { redirect } from "next/navigation";
 
 export async function getPagedTweets(page: number) {
   const tweets = await db.tweet.findMany({
@@ -55,7 +56,9 @@ export async function addTweet(formData: FormData) {
           },
         },
       });
-      return newTweet;
+      // return newTweet;
+      // TODO revalidate나 useOptimistic으로 변경 필요
+      redirect("/");
     }
   }
 }
