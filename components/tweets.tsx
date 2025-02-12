@@ -2,6 +2,8 @@
 
 import { getPagedTweets } from "@/app/actions";
 import { TweetsProps } from "@/app/page";
+import { HandThumbUpIcon } from "@heroicons/react/24/outline";
+
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -30,8 +32,12 @@ export default function Tweets({
             <div className="card-body">
               <h2 className="card-title">{tweet.user.username}</h2>
               <p>{tweet.tweet}</p>
+
               <div className="card-actions justify-end">
-                <div className="badge">{tweet._count.Like}</div>
+                <div className="btn gap-2">
+                  <HandThumbUpIcon className="w-4" />
+                  <span>{tweet._count.Like}</span>
+                </div>
               </div>
             </div>
           </div>

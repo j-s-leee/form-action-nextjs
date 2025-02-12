@@ -1,32 +1,72 @@
+import LikeButton from "@/components/like-button";
 import db from "@/lib/db";
+import getSession from "@/lib/session";
 import { FireIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { REPLServer } from "repl";
+import { unstable_cache as nextCache } from "next/cache";
 
 async function getTweetDetail(id: number) {
-  const tweet = db.tweet.findUnique({
-    select: {
-      id: true,
-      tweet: true,
-      created_at: true,
-      user: {
-        select: {
-          id: true,
-          username: true,
+  try {
+    const tweet = db.tweet.findUnique({
+      select: {
+        id: true,
+        tweet: true,
+        created_at: true,
+        user: {
+          select: {
+            id: true,
+            username: true,
+          },
+        },
+        _count: {
+          select: {
+            Like: true,
+          },
         },
       },
-      _count: {
-        select: {
-          Like: true,
-        },
+      where: {
+        id,
       },
-    },
+    });
+    return tweet;
+  } catch (e) {
+    return null;
+  }
+}
+
+const getCachedTweet = nextCache(getTweetDetail, ["tweet-detail"], {
+  tags: ["tweet-detail"],
+  revalidate: 60,
+});
+
+async function getLikeStateus(tweetId: number, userId: number) {
+  const isLiked = await db.like.findUnique({
     where: {
-      id,
+      id: {
+        tweetId,
+        userId,
+      },
     },
   });
-  return tweet;
+  const likeCount = await db.like.count({
+    where: {
+      tweetId,
+    },
+  });
+  return {
+    isLiked: !!isLiked,
+    likeCount,
+  };
+}
+
+async function getCachedLikeStatus(tweetId: number) {
+  const session = await getSession();
+  const userId = session.id!;
+  const cachedLikeStatus = nextCache(getLikeStateus, ["tweet-like-status"], {
+    tags: [`like-status-${tweetId}`],
+  });
+  return cachedLikeStatus(tweetId, userId);
 }
 
 export default async function TweetDetail({
@@ -38,7 +78,10 @@ export default async function TweetDetail({
   const tweetId = Number(id);
   if (isNaN(tweetId)) return notFound();
 
-  const tweet = await getTweetDetail(tweetId);
+  const tweet = await getCachedTweet(tweetId);
+
+  const { isLiked, likeCount } = await getCachedLikeStatus(tweetId);
+
   return (
     <div className="flex flex-col gap-10 p-10 max-w-screen-sm mx-auto">
       <div className="flex flex-col gap-2 *:font-medium items-center">
@@ -57,7 +100,11 @@ export default async function TweetDetail({
               <h2 className="card-title">{tweet?.user.username}</h2>
               <p>{tweet?.tweet}</p>
               <div className="card-actions justify-end">
-                <div className="badge">{tweet?._count.Like}</div>
+                <LikeButton
+                  isLiked={isLiked}
+                  likeCount={likeCount}
+                  tweetId={tweetId}
+                />
               </div>
             </div>
           </div>
