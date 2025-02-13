@@ -5,6 +5,7 @@ import { FireIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { unstable_cache as nextCache } from "next/cache";
+import { formatToTimeAgo } from "@/utils/format";
 
 async function getTweetDetail(id: number) {
   try {
@@ -69,6 +70,36 @@ async function getCachedLikeStatus(tweetId: number) {
   return cachedLikeStatus(tweetId, userId);
 }
 
+async function getResponses(tweetId: number) {
+  const responses = await db.response.findMany({
+    where: {
+      tweetId,
+    },
+    select: {
+      id: true,
+      content: true,
+      created_at: true,
+      user: {
+        select: {
+          username: true,
+          id: true,
+        },
+      },
+    },
+    orderBy: {
+      id: "desc",
+    },
+  });
+  return responses;
+}
+
+async function getCachedResponses(tweetId: number) {
+  const cachedResponses = nextCache(getResponses, ["tweet-responses"], {
+    tags: [`tweet-responses-${tweetId}`],
+  });
+  return cachedResponses(tweetId);
+}
+
 export default async function TweetDetail({
   params,
 }: {
@@ -81,6 +112,7 @@ export default async function TweetDetail({
   const tweet = await getCachedTweet(tweetId);
 
   const { isLiked, likeCount } = await getCachedLikeStatus(tweetId);
+  const responses = await getCachedResponses(tweetId);
 
   return (
     <div className="flex flex-col gap-10 p-10 max-w-screen-sm mx-auto">
@@ -110,9 +142,18 @@ export default async function TweetDetail({
           </div>
         </div>
         <div className="flex flex-col gap-2 w-full">
-          <div className="card card-bordered w-full px-10 py-4">reply...</div>
-          <div className="card card-bordered w-full px-10 py-4">reply...</div>
-          <div className="card card-bordered w-full px-10 py-4">reply...</div>
+          {responses &&
+            responses.map((response) => (
+              <div className="chat chat-start" key={response.id}>
+                <div className="chat-header">
+                  {response.user.username}
+                  <time className="text-xs opacity-50 ml-2">
+                    {formatToTimeAgo(response.created_at.toString())}
+                  </time>
+                </div>
+                <div className="chat-bubble">{response.content}</div>
+              </div>
+            ))}
         </div>
       </div>
     </div>
