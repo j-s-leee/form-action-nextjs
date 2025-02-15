@@ -21,6 +21,7 @@ async function getTweets(page?: number) {
       _count: {
         select: {
           Like: true,
+          Response: true,
         },
       },
     },

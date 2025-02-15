@@ -21,6 +21,7 @@ export async function getPagedTweets(page: number) {
       _count: {
         select: {
           Like: true,
+          Response: true,
         },
       },
     },

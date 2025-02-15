@@ -1,7 +1,10 @@
 import LikeButton from "@/components/like-button";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
-import { FireIcon } from "@heroicons/react/24/outline";
+import {
+  ChatBubbleBottomCenterIcon,
+  FireIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { unstable_cache as nextCache } from "next/cache";
@@ -24,6 +27,7 @@ async function getTweetDetail(id: number) {
         _count: {
           select: {
             Like: true,
+            Response: true,
           },
         },
       },
@@ -140,6 +144,10 @@ export default async function TweetDetail({
                   likeCount={likeCount}
                   tweetId={tweetId}
                 />
+                <button className="btn">
+                  <ChatBubbleBottomCenterIcon className="w-4" />
+                  {tweet?._count.Response}
+                </button>
               </div>
             </div>
           </div>

@@ -2,7 +2,10 @@
 
 import { getPagedTweets } from "@/app/actions";
 import { TweetsProps } from "@/app/page";
-import { HandThumbUpIcon } from "@heroicons/react/24/outline";
+import {
+  ChatBubbleBottomCenterIcon,
+  HandThumbUpIcon,
+} from "@heroicons/react/24/outline";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -38,6 +41,10 @@ export default function Tweets({
                   <HandThumbUpIcon className="w-4" />
                   <span>{tweet._count.Like}</span>
                 </div>
+                <button className="btn">
+                  <ChatBubbleBottomCenterIcon className="w-4" />
+                  {tweet._count.Response}
+                </button>
               </div>
             </div>
           </div>
