@@ -4,7 +4,6 @@ import { dislikeTweet, likeTweet } from "@/app/tweets/actions";
 import { HandThumbUpIcon as ThumbUpSolid } from "@heroicons/react/24/solid";
 import { HandThumbUpIcon as ThumbUpOutline } from "@heroicons/react/24/outline";
 import { useOptimistic, useTransition } from "react";
-import { Span } from "next/dist/trace";
 
 interface LikeButtonProps {
   isLiked: boolean;
