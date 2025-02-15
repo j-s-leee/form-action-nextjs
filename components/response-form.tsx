@@ -1,7 +1,7 @@
 "use client";
 
-import { addResponse } from "@/app/tweets/[id]/actions";
-import { Response } from "@/app/tweets/[id]/page";
+import { addResponse } from "@/app/(tabs)/tweets/[id]/actions";
+import { Response } from "@/app/(tabs)/tweets/[id]/page";
 import { ArrowTurnDownLeftIcon } from "@heroicons/react/24/outline";
 
 import { useOptimistic, useState } from "react";

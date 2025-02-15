@@ -22,31 +22,28 @@ export default function Home() {
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
           <form action={dispatch} className="card-body">
-            <LoginInput
-              name="email"
-              required
-              type="email"
-              placeholder="Email"
-              errors={state?.fieldErrors.email}
-            />
-            <LoginInput
-              name="password"
-              required
-              type="password"
-              placeholder="Password"
-              errors={state?.fieldErrors.password}
-            />
-            <label className="label">
-              <Link
-                href="/create-account"
-                className="label-text-alt link link-hover"
-              >
-                Create Account
-              </Link>
-            </label>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
-            </div>
+            <fieldset className="fieldset">
+              <LoginInput
+                name="email"
+                required
+                type="email"
+                placeholder="Email"
+                errors={state?.fieldErrors.email}
+              />
+              <LoginInput
+                name="password"
+                required
+                type="password"
+                placeholder="Password"
+                errors={state?.fieldErrors.password}
+              />
+              <div>
+                <Link href="/create-account" className="link link-hover">
+                  Create Account
+                </Link>
+              </div>
+              <button className="btn btn-neutral">Login</button>
+            </fieldset>
           </form>
         </div>
       </div>

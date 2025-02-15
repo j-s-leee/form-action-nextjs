@@ -2,9 +2,9 @@ import { ArrowDownIcon, FireIcon } from "@heroicons/react/24/outline";
 
 export default function Footer() {
   return (
-    <footer className="footer footer-center bg-primary text-primary-content p-10">
+    <footer className="footer footer-horizontal footer-center bg-primary text-primary-content p-10">
       <aside>
-        <FireIcon className="w-12" />
+        <img src="/pangin.png" className="size-16" />
         <p className="font-bold">
           Clone Startups. Learn to Code.
           <br />

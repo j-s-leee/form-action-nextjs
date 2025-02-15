@@ -1,8 +1,5 @@
 "use client";
 
-import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
-import Button from "./button";
-import Input from "./input";
 import { addTweet } from "@/app/(tabs)/home/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -32,15 +29,13 @@ export default function AddTweet() {
   return (
     <div className="card card-bordered w-full bg-base-100">
       <form action={onValid} className="flex flex-col gap-5 card-body">
-        <Input
+        <textarea
           {...register("tweet")}
           required
-          type="text"
-          placeholder="tweet anything"
-          icon={<ChatBubbleBottomCenterIcon />}
-          errors={[errors.tweet?.message ?? ""]}
+          className="textarea textarea-bordered w-full"
+          placeholder="Tweet anything"
         />
-        <Button text="tweet" />
+        <button className="btn btn-neutral">tweet</button>
       </form>
     </div>
   );
