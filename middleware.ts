@@ -6,6 +6,7 @@ interface Routes {
 }
 
 const publicOnlyUrls: Routes = {
+  "/": true,
   "/log-in": true,
   "/create-account": true,
 };
@@ -15,11 +16,11 @@ export async function middleware(request: NextRequest) {
   const exists = publicOnlyUrls[request.nextUrl.pathname];
   if (!session.id) {
     if (!exists) {
-      return NextResponse.redirect(new URL("/log-in", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
     }
   } else {
     if (exists) {
-      return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL("/home", request.url));
     }
   }
 }

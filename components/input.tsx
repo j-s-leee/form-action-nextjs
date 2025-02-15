@@ -27,7 +27,7 @@ const _Input = (
           name={name}
           ref={ref}
           {...rest}
-          className={`"bg-transparent ring-neutral-300 focus:outline-none focus:ring-2 transition placeholder:text-neutral-400 placeholder:text-sm placeholder:font-semibold rounded-full w-full h-10 py-2 pl-10 border border-neutral-300" ${
+          className={`"bg-transparent ring-neutral-300 focus:outline-none focus:ring-2 transition placeholder:text-neutral-400 placeholder:text-sm placeholder:font-semibold rounded-lg w-full h-10 py-2 pl-10 border border-neutral-300" ${
             hasError ? "border-red-300" : "border-neutral-300"
           }`}
         />

@@ -1,48 +1,18 @@
-import AddTweet from "@/components/add-tweet";
-import Tweets from "@/components/tweets";
-import { PAGE_SIZE } from "@/lib/constants";
-import db from "@/lib/db";
-import { FireIcon } from "@heroicons/react/24/outline";
-import { Prisma } from "@prisma/client";
+import ThemeToggle from "@/components/theme-toggle";
 import Link from "next/link";
 
-async function getTweets(page?: number) {
-  const tweets = await db.tweet.findMany({
-    select: {
-      id: true,
-      tweet: true,
-      created_at: true,
-      user: {
-        select: {
-          id: true,
-          username: true,
-        },
-      },
-      _count: {
-        select: {
-          Like: true,
-        },
-      },
-    },
-    take: PAGE_SIZE,
-    orderBy: {
-      created_at: "desc",
-    },
-  });
-  return tweets;
-}
-
-export type TweetsProps = Prisma.PromiseReturnType<typeof getTweets>;
-
-export default async function Homepage() {
-  const tweets = await getTweets();
+export default function Home() {
   return (
-    <div className="flex flex-col gap-10 p-10 max-w-screen-sm mx-auto">
-      <div className="flex flex-col gap-2 *:font-medium items-center">
-        <FireIcon className="size-16 text-red-400" />
-        <Link href="/profile">PROFILE</Link>
-        <AddTweet />
-        <Tweets initialTweets={tweets} />
+    <div className="hero bg-base-200 min-h-screen">
+      <div className="hero-content text-center">
+        <div className="max-w-md">
+          <ThemeToggle />
+          <h1 className="text-5xl font-bold pt-6">안녕하세요</h1>
+          <p className="py-6">캐럿마켓 클론 챌린지를 하며 만들었어요.</p>
+          <Link href="/log-in" className="btn btn-primary">
+            구경하기
+          </Link>
+        </div>
       </div>
     </div>
   );

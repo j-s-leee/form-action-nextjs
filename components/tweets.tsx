@@ -1,7 +1,12 @@
 "use client";
 
-import { getPagedTweets } from "@/app/actions";
-import { TweetsProps } from "@/app/page";
+import { getPagedTweets } from "@/app/(tabs)/home/actions";
+import { TweetsProps } from "@/app/(tabs)/home/page";
+import {
+  ChatBubbleBottomCenterIcon,
+  HandThumbUpIcon,
+} from "@heroicons/react/24/outline";
+
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -26,12 +31,20 @@ export default function Tweets({
     <div className="flex flex-col gap-4 w-full">
       {tweets.map((tweet) => (
         <Link href={`/tweets/${tweet.id}`} key={tweet.id} className="w-full">
-          <div className="card card-bordered w-full bg-base-100">
+          <div className="card card-compact card-bordered w-full bg-base-100">
             <div className="card-body">
               <h2 className="card-title">{tweet.user.username}</h2>
               <p>{tweet.tweet}</p>
+
               <div className="card-actions justify-end">
-                <div className="badge">{tweet._count.Like}</div>
+                <div className="btn btn-sm gap-2">
+                  <HandThumbUpIcon className="w-4" />
+                  <span>{tweet._count.Like}</span>
+                </div>
+                <button className="btn btn-sm">
+                  <ChatBubbleBottomCenterIcon className="w-4" />
+                  {tweet._count.Response}
+                </button>
               </div>
             </div>
           </div>
