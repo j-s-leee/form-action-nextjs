@@ -3,10 +3,10 @@
 import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
 import Button from "./button";
 import Input from "./input";
-import { addTweet } from "@/app/actions";
+import { addTweet } from "@/app/(tabs)/home/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { tweetSchema, TweetType } from "@/app/schema";
+import { tweetSchema, TweetType } from "@/app/(tabs)/home/schema";
 
 export default function AddTweet() {
   const {

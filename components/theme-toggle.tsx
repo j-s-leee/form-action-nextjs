@@ -20,7 +20,7 @@ export default function ThemeToggle() {
   };
 
   return (
-    <label className="swap swap-rotate fixed top-4 right-4">
+    <label className="swap swap-rotate">
       <input
         type="checkbox"
         className="theme-controller"

@@ -130,11 +130,15 @@ export default async function TweetDetail({
             <li>
               <Link href="/">Home</Link>
             </li>
-            <li>{tweet?.tweet}</li>
+            <li>
+              {tweet!.tweet.length > 10
+                ? `${tweet?.tweet.substring(0, 10)}...`
+                : tweet?.tweet}
+            </li>
           </ul>
         </div>
         <div className="flex flex-col gap-4 w-full">
-          <div className="card card-bordered w-full bg-base-100">
+          <div className="card card-compact card-bordered w-full bg-base-100">
             <div className="card-body">
               <h2 className="card-title">{tweet?.user.username}</h2>
               <p>{tweet?.tweet}</p>
@@ -144,7 +148,7 @@ export default async function TweetDetail({
                   likeCount={likeCount}
                   tweetId={tweetId}
                 />
-                <button className="btn">
+                <button className="btn btn-sm">
                   <ChatBubbleBottomCenterIcon className="w-4" />
                   {tweet?._count.Response}
                 </button>

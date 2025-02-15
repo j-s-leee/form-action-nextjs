@@ -43,7 +43,7 @@ export default function LikeButton({
   };
 
   return (
-    <button onClick={onClick} className="btn">
+    <button onClick={onClick} className="btn btn-sm">
       {state.isLiked ? (
         <ThumbUpSolid className="w-4" />
       ) : (

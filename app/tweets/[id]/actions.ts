@@ -1,6 +1,6 @@
 "use server";
 
-import { responseSchema } from "@/app/schema";
+import { responseSchema } from "@/app/(tabs)/home/schema";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { revalidatePath } from "next/cache";
