@@ -2,9 +2,11 @@
 
 import { getPagedTweets } from "@/app/(tabs)/home/actions";
 import { TweetsProps } from "@/app/(tabs)/home/page";
+import { formatToTimeAgo } from "@/utils/format";
 import {
   ChatBubbleBottomCenterIcon,
   HandThumbUpIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 
 import Link from "next/link";
@@ -28,29 +30,34 @@ export default function Tweets({
   }, [page]);
 
   return (
-    <div className="flex flex-col gap-4 w-full">
-      {tweets.map((tweet) => (
-        <Link href={`/tweets/${tweet.id}`} key={tweet.id} className="w-full">
-          <div className="card card-compact card-bordered w-full bg-base-100">
-            <div className="card-body">
-              <h2 className="card-title">{tweet.user.username}</h2>
-              <p>{tweet.tweet}</p>
-
-              <div className="card-actions justify-end">
-                <div className="btn btn-sm gap-2">
-                  <HandThumbUpIcon className="w-4" />
-                  <span>{tweet._count.Like}</span>
-                </div>
-                <button className="btn btn-sm">
-                  <ChatBubbleBottomCenterIcon className="w-4" />
-                  {tweet._count.Response}
-                </button>
+    <div className="w-full flex flex-col gap-2">
+      <ul className="list bg-base-100 rounded-box shadow-md ">
+        {tweets.map((tweet) => (
+          <Link href={`/tweets/${tweet.id}`} key={tweet.id}>
+            <li className="list-row">
+              <div>
+                <UserCircleIcon className="size-10" />
               </div>
-            </div>
-          </div>
-        </Link>
-      ))}
-      <div className="join grid grid-cols-2">
+              <div>
+                <div>{tweet.user.username}</div>
+                <div className="text-xs uppercase font-semibold opacity-60">
+                  {formatToTimeAgo(tweet.created_at.toString())}
+                </div>
+              </div>
+              <p className="list-col-wrap text-xs ">{tweet.tweet}</p>
+              <button className="btn btn-square btn-ghost">
+                <HandThumbUpIcon className="size-4 stroke-2" />
+                <span>{tweet._count.Like}</span>
+              </button>
+              <button className="btn btn-square btn-ghost">
+                <ChatBubbleBottomCenterIcon className="size-4 stroke-2" />
+                <span>{tweet._count.Response}</span>
+              </button>
+            </li>
+          </Link>
+        ))}
+      </ul>
+      <div className="join grid grid-cols-2 justify-center">
         <button
           className="join-item btn btn-outline"
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}

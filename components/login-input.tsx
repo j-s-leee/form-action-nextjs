@@ -19,20 +19,20 @@ const _Input = (
   const hasError = errors && errors.length > 0;
 
   return (
-    <div className="form-control">
-      <label className="label" htmlFor={name}>
-        <span className="label-text capitalize">{name}</span>
+    <div className="fieldset">
+      <label className="fieldset-label capitalize" htmlFor={name}>
+        {name}
       </label>
       <input
         name={name}
         ref={ref}
         {...rest}
-        className={`input input-bordered ${
+        className={`input ${
           hasError ? "border-red-300" : "border-neutral-300"
         }`}
       />
 
-      <label className="label">
+      <label className="fieldset-label">
         {errors?.map((error, idx) => (
           <span key={idx} className="text-red-400 label-text-alt">
             {error}

@@ -4,6 +4,7 @@ import getSession from "@/lib/session";
 import {
   ChatBubbleBottomCenterIcon,
   FireIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -122,9 +123,8 @@ export default async function TweetDetail({
   const responses = await getCachedResponses(tweetId);
 
   return (
-    <div className="flex flex-col gap-10 p-10 max-w-screen-sm mx-auto">
-      <div className="flex flex-col gap-2 *:font-medium items-center">
-        <FireIcon className="size-16 text-red-400" />
+    <div className="hero bg-base-200 min-h-screen">
+      <div className="hero-content flex-col w-full max-w-screen-md items-start">
         <div className="breadcrumbs text-sm">
           <ul>
             <li>
@@ -140,7 +140,14 @@ export default async function TweetDetail({
         <div className="flex flex-col gap-4 w-full">
           <div className="card card-compact card-bordered w-full bg-base-100">
             <div className="card-body">
-              <h2 className="card-title">{tweet?.user.username}</h2>
+              <h2 className="card-title">
+                <div className="avatar">
+                  <div className="w-10 rounded-full">
+                    <UserCircleIcon />
+                  </div>
+                </div>
+                {tweet?.user.username}
+              </h2>
               <p>{tweet?.tweet}</p>
               <div className="card-actions justify-end">
                 <LikeButton
@@ -162,6 +169,11 @@ export default async function TweetDetail({
           {responses &&
             responses.map((response) => (
               <div className="chat chat-start" key={response.id}>
+                <div className="chat-image avatar">
+                  <div className="w-10 rounded-full">
+                    <UserCircleIcon />
+                  </div>
+                </div>
                 <div className="chat-header">
                   {response.user.username}
                   <time className="text-xs opacity-50 ml-2">

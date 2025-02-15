@@ -2,9 +2,7 @@ import AddTweet from "@/components/add-tweet";
 import Tweets from "@/components/tweets";
 import { PAGE_SIZE } from "@/lib/constants";
 import db from "@/lib/db";
-import { FireIcon } from "@heroicons/react/24/outline";
 import { Prisma } from "@prisma/client";
-import Link from "next/link";
 
 async function getTweets(page?: number) {
   const tweets = await db.tweet.findMany({
@@ -38,10 +36,8 @@ export type TweetsProps = Prisma.PromiseReturnType<typeof getTweets>;
 export default async function Homepage() {
   const tweets = await getTweets();
   return (
-    <div className="flex flex-col gap-10 p-10 max-w-screen-sm mx-auto">
-      <div className="flex flex-col gap-2 *:font-medium items-center">
-        <FireIcon className="size-16 text-red-400" />
-        <Link href="/profile">PROFILE</Link>
+    <div className="hero bg-base-200 min-h-screen">
+      <div className="hero-content flex-col w-full max-w-screen-md">
         <AddTweet />
         <Tweets initialTweets={tweets} />
       </div>
