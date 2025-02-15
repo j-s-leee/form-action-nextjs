@@ -1,11 +1,8 @@
 "use client";
 
-import Button from "@/components/button";
-
 import { loginAction } from "./actions";
-import Input from "@/components/input";
 import { useActionState } from "react";
-import { AtSymbolIcon, FireIcon, KeyIcon } from "@heroicons/react/24/outline";
+
 import Link from "next/link";
 import LoginInput from "@/components/login-input";
 import ThemeToggle from "@/components/theme-toggle";
