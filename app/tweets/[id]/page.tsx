@@ -6,6 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { unstable_cache as nextCache } from "next/cache";
 import { formatToTimeAgo } from "@/utils/format";
+import ResponseForm from "@/components/response-form";
 
 async function getTweetDetail(id: number) {
   try {
@@ -69,6 +70,8 @@ async function getCachedLikeStatus(tweetId: number) {
   });
   return cachedLikeStatus(tweetId, userId);
 }
+
+export type Response = Awaited<ReturnType<typeof getResponses>>;
 
 async function getResponses(tweetId: number) {
   const responses = await db.response.findMany({
@@ -141,6 +144,8 @@ export default async function TweetDetail({
             </div>
           </div>
         </div>
+        <div className="divider"></div>
+        <ResponseForm responses={responses} tweetId={tweetId} />
         <div className="flex flex-col gap-2 w-full">
           {responses &&
             responses.map((response) => (
