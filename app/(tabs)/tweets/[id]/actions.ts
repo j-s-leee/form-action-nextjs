@@ -23,5 +23,7 @@ export const addResponse = async (tweetId: number, content: string) => {
       },
     });
     revalidatePath(`/tweets/${tweetId}`);
-  } catch (e) {}
+  } catch (e) {
+    console.error(e);
+  }
 };

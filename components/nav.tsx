@@ -1,4 +1,4 @@
-import { FireIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import ThemeToggle from "./theme-toggle";
 import Link from "next/link";
 
@@ -7,7 +7,13 @@ export default function Nav() {
     <div className="navbar bg-base-100">
       <div className="flex-none">
         <button className="btn btn-square btn-ghost">
-          <img src="/pangin.png" className="size-10" />
+          <Image
+            src="/pangin.png"
+            alt="Logo"
+            width={40}
+            height={40}
+            className="size-10"
+          />
         </button>
       </div>
       <div className="flex-1">

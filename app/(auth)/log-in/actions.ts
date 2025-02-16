@@ -27,7 +27,7 @@ const formSchema = z.object({
   }),
 });
 
-export async function loginAction(prevState: any, formData: FormData) {
+export async function loginAction(_prevState: any, formData: FormData) {
   const data = {
     email: formData.get("email"),
     password: formData.get("password"),

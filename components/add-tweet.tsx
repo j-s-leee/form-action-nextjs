@@ -6,11 +6,7 @@ import { useForm } from "react-hook-form";
 import { tweetSchema, TweetType } from "@/app/(tabs)/home/schema";
 
 export default function AddTweet() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<TweetType>({
+  const { register, handleSubmit } = useForm<TweetType>({
     resolver: zodResolver(tweetSchema),
   });
 

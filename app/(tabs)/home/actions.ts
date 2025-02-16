@@ -45,7 +45,7 @@ export async function addTweet(formData: FormData) {
   } else {
     const session = await getSession();
     if (session.id) {
-      const newTweet = await db.tweet.create({
+      await db.tweet.create({
         data: {
           tweet: result.data.tweet,
           userId: session.id,
@@ -57,8 +57,7 @@ export async function addTweet(formData: FormData) {
           },
         },
       });
-      // return newTweet;
-      // TODO revalidate나 useOptimistic으로 변경 필요
+
       redirect("/");
     }
   }

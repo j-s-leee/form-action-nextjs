@@ -1,6 +1,7 @@
 import db from "@/lib/db";
 import getSession from "@/lib/session";
-import { BoltIcon, HeartIcon, UserIcon } from "@heroicons/react/24/outline";
+import { BoltIcon, HeartIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 
 async function getUser() {
@@ -51,7 +52,7 @@ export default async function Profile() {
             <div className="stat-figure text-secondary">
               <div className="avatar online">
                 <div className="w-16 rounded-full">
-                  <img src="/pangin.png" />
+                  <Image src="/pangin.png" width={64} height={64} alt="Logo" />
                 </div>
               </div>
             </div>

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   ForwardedRef,
   forwardRef,
@@ -13,7 +12,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const _Input = (
-  { name, errors, icon, ...rest }: InputProps,
+  { name, errors, ...rest }: InputProps,
   ref: ForwardedRef<HTMLInputElement>
 ) => {
   const hasError = errors && errors.length > 0;

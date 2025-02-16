@@ -21,7 +21,7 @@ export default function LikeButton({
       isLiked,
       likeCount,
     },
-    (prevState, payload) => ({
+    (prevState, _payload) => ({
       isLiked: !prevState.isLiked,
       likeCount: prevState.isLiked
         ? prevState.likeCount - 1
@@ -29,7 +29,7 @@ export default function LikeButton({
     })
   );
 
-  const [isPending, startTransition] = useTransition();
+  const [_isPending, startTransition] = useTransition();
 
   const onClick = async () => {
     startTransition(async () => {

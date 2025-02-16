@@ -24,6 +24,7 @@ async function getTweets(page?: number) {
       },
     },
     take: PAGE_SIZE,
+    skip: PAGE_SIZE * ((page || 1) - 1),
     orderBy: {
       created_at: "desc",
     },

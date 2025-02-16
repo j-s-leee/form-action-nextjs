@@ -15,7 +15,9 @@ export const likeTweet = async (tweetId: number) => {
       },
     });
     revalidateTag(`like-status-${tweetId}`);
-  } catch (e) {}
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 export const dislikeTweet = async (tweetId: number) => {
@@ -31,5 +33,7 @@ export const dislikeTweet = async (tweetId: number) => {
       },
     });
     revalidateTag(`like-status-${tweetId}`);
-  } catch (e) {}
+  } catch (e) {
+    console.error(e);
+  }
 };

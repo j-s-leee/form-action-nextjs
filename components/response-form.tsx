@@ -16,7 +16,7 @@ export default function ResponseForm({
   tweetId,
 }: ResponseFormProps) {
   const [error, setError] = useState<string | null>(null);
-  const [optimisticResponses, addOptimisticResponse] = useOptimistic<
+  const [_optimisticResponses, addOptimisticResponse] = useOptimistic<
     Response,
     string
   >(responses, (prevState, newResponse) => [
