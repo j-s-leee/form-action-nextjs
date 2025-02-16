@@ -5,13 +5,7 @@ export default function Footer() {
   return (
     <footer className="footer footer-horizontal footer-center bg-primary text-primary-content p-10">
       <aside>
-        <Image
-          src="/pangin.png"
-          alt="Logo"
-          width={64}
-          height={64}
-          className="size-16"
-        />
+        <Image src="/pangin.png" alt="Logo" width={40} height={40} />
         <p className="font-bold">
           Clone Startups. Learn to Code.
           <br />
